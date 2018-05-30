@@ -3,6 +3,10 @@ import { Observable} from 'rxjs';
 import { of } from 'rxjs/observable/of';
 import {delay} from 'rxjs/operators/delay';
 import {tap} from 'rxjs/operators/tap';
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2e48ac6eba9d22a9371ec13dd37927ea588ac158
 @Injectable()
 export class AuthService {
   isLoggedIn: boolean = false;
