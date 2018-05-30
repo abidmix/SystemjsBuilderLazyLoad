@@ -1,6 +1,6 @@
 "use strict";
 var gulp = require('gulp');
-var Builder = require('systemjs-builder');
+var Builder = require('gulp-systemjs-builder');
 var path = require("path");
 /**var config = {
   transpiler: 'babel',

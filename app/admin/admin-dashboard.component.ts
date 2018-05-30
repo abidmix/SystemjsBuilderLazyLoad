@@ -1,6 +1,6 @@
 import { Component, OnInit }    from '@angular/core';
 import { ActivatedRoute }       from '@angular/router';
-import { Observable }           from 'rxjs/Observable';
+import { Observable }           from 'rxjs';
 import { PreloadSelectedModules } from '../selective-preload-strategy';
 
 import 'rxjs/add/operator/map';

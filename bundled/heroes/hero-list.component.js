@@ -8,36 +8,46 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 // TODO SOMEDAY: Feature Componetized like CrisisCenter
-var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
-var hero_service_1 = require('./hero.service');
-var HeroListComponent = (function () {
-    function HeroListComponent(service, route, router) {
+const core_1 = require("@angular/core");
+const router_1 = require("@angular/router");
+const hero_service_1 = require("./hero.service");
+let HeroListComponent = class HeroListComponent {
+    constructor(service, route, router) {
         this.service = service;
         this.route = route;
         this.router = router;
     }
-    HeroListComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.route.params.forEach(function (params) {
-            _this.selectedId = +params['id'];
-            _this.service.getHeroes()
-                .then(function (heroes) { return _this.heroes = heroes; });
+    ngOnInit() {
+        this.route.params.forEach((params) => {
+            this.selectedId = +params['id'];
+            this.service.getHeroes()
+                .then(heroes => this.heroes = heroes);
         });
-    };
-    HeroListComponent.prototype.isSelected = function (hero) { return hero.id === this.selectedId; };
-    HeroListComponent.prototype.onSelect = function (hero) {
+    }
+    isSelected(hero) { return hero.id === this.selectedId; }
+    onSelect(hero) {
         this.router.navigate(['/hero', hero.id]);
-    };
-    HeroListComponent = __decorate([
-        core_1.Component({
-            template: "\n    <h2>HEROES</h2>\n    <ul class=\"items\">\n      <li *ngFor=\"let hero of heroes\"\n        [class.selected]=\"isSelected(hero)\"\n        (click)=\"onSelect(hero)\">\n        <span class=\"badge\">{{hero.id}}</span> {{hero.name}}\n      </li>\n    </ul>\n  "
-        }), 
-        __metadata('design:paramtypes', [hero_service_1.HeroService, router_1.ActivatedRoute, router_1.Router])
-    ], HeroListComponent);
-    return HeroListComponent;
-}());
+    }
+};
+HeroListComponent = __decorate([
+    core_1.Component({
+        template: `
+    <h2>HEROES</h2>
+    <ul class="items">
+      <li *ngFor="let hero of heroes"
+        [class.selected]="isSelected(hero)"
+        (click)="onSelect(hero)">
+        <span class="badge">{{hero.id}}</span> {{hero.name}}
+      </li>
+    </ul>
+  `
+    }),
+    __metadata("design:paramtypes", [hero_service_1.HeroService,
+        router_1.ActivatedRoute,
+        router_1.Router])
+], HeroListComponent);
 exports.HeroListComponent = HeroListComponent;
 /*
 Copyright 2016 Google Inc. All Rights Reserved.

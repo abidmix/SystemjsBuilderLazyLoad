@@ -8,39 +8,50 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
-var crisis_service_1 = require('./crisis.service');
-var CrisisListComponent = (function () {
-    function CrisisListComponent(service, route, router) {
+Object.defineProperty(exports, "__esModule", { value: true });
+const core_1 = require("@angular/core");
+const router_1 = require("@angular/router");
+const crisis_service_1 = require("./crisis.service");
+let CrisisListComponent = class CrisisListComponent {
+    constructor(service, route, router) {
         this.service = service;
         this.route = route;
         this.router = router;
     }
-    CrisisListComponent.prototype.isSelected = function (crisis) {
+    isSelected(crisis) {
         return crisis.id === this.selectedId;
-    };
-    CrisisListComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.route.params.forEach(function (params) {
-            _this.selectedId = params['id'];
-            _this.service.getCrises()
-                .then(function (crises) { return _this.crises = crises; });
+    }
+    ngOnInit() {
+        this.route.params.forEach((params) => {
+            this.selectedId = params['id'];
+            this.service.getCrises()
+                .then(crises => this.crises = crises);
         });
-    };
-    CrisisListComponent.prototype.onSelect = function (crisis) {
+    }
+    onSelect(crisis) {
         this.selectedId = crisis.id;
         // Navigate with relative link
         this.router.navigate([crisis.id], { relativeTo: this.route });
-    };
-    CrisisListComponent = __decorate([
-        core_1.Component({
-            template: "\n    <ul class=\"items\">\n      <li *ngFor=\"let crisis of crises\"\n        [class.selected]=\"isSelected(crisis)\"\n        (click)=\"onSelect(crisis)\">\n        <span class=\"badge\">{{crisis.id}}</span> {{crisis.name}}\n      </li>\n    </ul>\n\n    <router-outlet></router-outlet>\n  "
-        }), 
-        __metadata('design:paramtypes', [crisis_service_1.CrisisService, router_1.ActivatedRoute, router_1.Router])
-    ], CrisisListComponent);
-    return CrisisListComponent;
-}());
+    }
+};
+CrisisListComponent = __decorate([
+    core_1.Component({
+        template: `
+    <ul class="items">
+      <li *ngFor="let crisis of crises"
+        [class.selected]="isSelected(crisis)"
+        (click)="onSelect(crisis)">
+        <span class="badge">{{crisis.id}}</span> {{crisis.name}}
+      </li>
+    </ul>
+
+    <router-outlet></router-outlet>
+  `
+    }),
+    __metadata("design:paramtypes", [crisis_service_1.CrisisService,
+        router_1.ActivatedRoute,
+        router_1.Router])
+], CrisisListComponent);
 exports.CrisisListComponent = CrisisListComponent;
 /*
 Copyright 2016 Google Inc. All Rights Reserved.

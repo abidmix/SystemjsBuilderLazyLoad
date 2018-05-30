@@ -8,33 +8,32 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
-var crisis_service_1 = require('./crisis.service');
-var CrisisDetailResolve = (function () {
-    function CrisisDetailResolve(cs, router) {
+Object.defineProperty(exports, "__esModule", { value: true });
+const core_1 = require("@angular/core");
+const router_1 = require("@angular/router");
+const crisis_service_1 = require("./crisis.service");
+let CrisisDetailResolve = class CrisisDetailResolve {
+    constructor(cs, router) {
         this.cs = cs;
         this.router = router;
     }
-    CrisisDetailResolve.prototype.resolve = function (route) {
-        var _this = this;
-        var id = +route.params['id'];
-        return this.cs.getCrisis(id).then(function (crisis) {
+    resolve(route) {
+        let id = +route.params['id'];
+        return this.cs.getCrisis(id).then(crisis => {
             if (crisis) {
                 return crisis;
             }
             else {
-                _this.router.navigate(['/crisis-center']);
+                this.router.navigate(['/crisis-center']);
                 return false;
             }
         });
-    };
-    CrisisDetailResolve = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [crisis_service_1.CrisisService, router_1.Router])
-    ], CrisisDetailResolve);
-    return CrisisDetailResolve;
-}());
+    }
+};
+CrisisDetailResolve = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [crisis_service_1.CrisisService, router_1.Router])
+], CrisisDetailResolve);
 exports.CrisisDetailResolve = CrisisDetailResolve;
 /*
 Copyright 2016 Google Inc. All Rights Reserved.

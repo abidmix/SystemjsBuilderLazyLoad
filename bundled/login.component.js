@@ -8,50 +8,55 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
-var auth_service_1 = require('./auth.service');
-var LoginComponent = (function () {
-    function LoginComponent(authService, router) {
+Object.defineProperty(exports, "__esModule", { value: true });
+const core_1 = require("@angular/core");
+const router_1 = require("@angular/router");
+const auth_service_1 = require("./auth.service");
+let LoginComponent = class LoginComponent {
+    constructor(authService, router) {
         this.authService = authService;
         this.router = router;
         this.setMessage();
     }
-    LoginComponent.prototype.setMessage = function () {
+    setMessage() {
         this.message = 'Logged ' + (this.authService.isLoggedIn ? 'in' : 'out');
-    };
-    LoginComponent.prototype.login = function () {
-        var _this = this;
+    }
+    login() {
         this.message = 'Trying to log in ...';
-        this.authService.login().subscribe(function () {
-            _this.setMessage();
-            if (_this.authService.isLoggedIn) {
+        this.authService.login().subscribe(() => {
+            this.setMessage();
+            if (this.authService.isLoggedIn) {
                 // Get the redirect URL from our auth service
                 // If no redirect has been set, use the default
-                var redirect = _this.authService.redirectUrl ? _this.authService.redirectUrl : '/admin';
+                let redirect = this.authService.redirectUrl ? this.authService.redirectUrl : '/admin';
                 // Set our navigation extras object
                 // that passes on our global query params and fragment
-                var navigationExtras = {
+                let navigationExtras = {
                     preserveQueryParams: true,
                     preserveFragment: true
                 };
                 // Redirect the user
-                _this.router.navigate([redirect], navigationExtras);
+                this.router.navigate([redirect], navigationExtras);
             }
         });
-    };
-    LoginComponent.prototype.logout = function () {
+    }
+    logout() {
         this.authService.logout();
         this.setMessage();
-    };
-    LoginComponent = __decorate([
-        core_1.Component({
-            template: "\n    <h2>LOGIN</h2>\n    <p>{{message}}</p>\n    <p>\n      <button (click)=\"login()\"  *ngIf=\"!authService.isLoggedIn\">Login</button>\n      <button (click)=\"logout()\" *ngIf=\"authService.isLoggedIn\">Logout</button>\n    </p>"
-        }), 
-        __metadata('design:paramtypes', [auth_service_1.AuthService, router_1.Router])
-    ], LoginComponent);
-    return LoginComponent;
-}());
+    }
+};
+LoginComponent = __decorate([
+    core_1.Component({
+        template: `
+    <h2>LOGIN</h2>
+    <p>{{message}}</p>
+    <p>
+      <button (click)="login()"  *ngIf="!authService.isLoggedIn">Login</button>
+      <button (click)="logout()" *ngIf="authService.isLoggedIn">Logout</button>
+    </p>`
+    }),
+    __metadata("design:paramtypes", [auth_service_1.AuthService, router_1.Router])
+], LoginComponent);
 exports.LoginComponent = LoginComponent;
 /*
 Copyright 2016 Google Inc. All Rights Reserved.
